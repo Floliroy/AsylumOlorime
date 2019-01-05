@@ -7,6 +7,7 @@ AsylumOlorime.name = "AsylumOlorime"
 AsylumOlorime.version = "1.0"
 
 AsylumOlorime.groupMembers = {}
+timeLeft = {0,0,0,0,0,0,0,0}
 ---------------------------
 ---- Variables Default ----
 ---------------------------
@@ -260,56 +261,60 @@ end
 ----------------
 
 function AsylumOlorime.Update()
+	if ((IsUnitInCombat("player")) and (GetZoneId(GetUnitZoneIndex("player")) == 1000)) then
+		local currentTimeStamp = GetGameTimeMilliseconds() / 1000
 
-	local left = 0;
-	local right = 0;
+		local left = 0;
+		local right = 0;
 
-	for playerID = 1, GetGroupSize() do
-		for numDD = 1, 8 do 
-			if (GetUnitDisplayName(GetGroupUnitTagByIndex(playerID)) == AsylumOlorime.DPS[numDD]) then
-				for i = 1,GetNumBuffs(GetGroupUnitTagByIndex(playerID)) do
-					local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(GetGroupUnitTagByIndex(playerID),i)
-					if ((abilityId == 109994) or (abilityId == 110020)) then
-						if numDD == 1 then
-							right = right + 1.9
-						elseif numDD == 2 then
-							right = right + 1.6
-						elseif numDD == 3 then
-							right = right + 1.3
-						elseif numDD == 4 then
-							right = right + 1
-						elseif numDD == 5 then
-							left = left + 1
-						elseif numDD == 6 then
-							left = left + 1.3
-						elseif numDD == 7 then
-							left = left + 1.6
-						elseif numDD == 8 then
-							left = left + 1.9
+		for playerID = 1, GetGroupSize() do
+			for numDD = 1, 8 do 
+				if (GetUnitDisplayName(GetGroupUnitTagByIndex(playerID)) == AsylumOlorime.DPS[numDD]) then
+					for i = 1,GetNumBuffs(GetGroupUnitTagByIndex(playerID)) do
+						local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(GetGroupUnitTagByIndex(playerID),i)
+						if ((abilityId == 109994) or (abilityId == 110020)) then
+
+							timeLeft[numDD] = timeEnding - currentTimeStamp
+
 						end
 					end
 				end
 			end
 		end
+
+		right 	= timeLeft[1]*1.3 + timeLeft[2]*1.2 + timeLeft[3]*1.1 + timeLeft[4]
+		left	= timeLeft[8]*1.3 + timeLeft[7]*1.2 + timeLeft[6]*1.1 + timeLeft[5]
+
+		local positionAlert = "Set Alert Position"
+
+		if right > left then
+			AsylumOlorimeAlert:SetHidden(false)
+			positionAlert = "Left"
+		elseif right < left then
+			AsylumOlorimeAlert:SetHidden(false)
+			positionAlert = "Right"
+		elseif right == left then 
+			AsylumOlorimeAlert:SetHidden(false)
+			positionAlert = "Middle"
+		end
+
+		AsylumOlorimeFight:SetText(string.format("%s", positionAlert))
+	else
+		AsylumOlorimeAlert:SetHidden(true)
 	end
-
-	local positionAlert = "Set Alert Position"
-
-	if right > left then
-		AsylumOlorimeAlert:SetHidden(false)
-		positionAlert = "Left"
-	elseif right < left then
-		AsylumOlorimeAlert:SetHidden(false)
-		positionAlert = "Right"
-	elseif right == left then 
-		AsylumOlorimeAlert:SetHidden(false)
-		positionAlert = "Middle"
-	end
-
-	AsylumOlorimeFight:SetText(string.format("%s", positionAlert))
-
 end
- 
+
+function AsylumOlorime.Reset(event, inCombat)
+	if inCombat ~= AsylumOlorime.inCombat then
+		AsylumOlorime.inCombat = inCombat
+		
+		timeLeft = {0,0,0,0,0,0,0,0}
+	end
+end
+
+----------
+-- MAIN --
+----------
 function AsylumOlorime:Initialize()
 	--Settings
 	AsylumOlorime.CheckMembers()
@@ -331,6 +336,7 @@ function AsylumOlorime:Initialize()
 	--Update
 	AsylumOlorime.DPS = AsylumOlorime.savedVariables.DPS
 
+	EVENT_MANAGER:RegisterForEvent(AsylumOlorime.name, EVENT_PLAYER_COMBAT_STATE, AsylumOlorime.Reset)
 	EVENT_MANAGER:RegisterForUpdate(AsylumOlorime.name, 250, AsylumOlorime.Update)
 	EVENT_MANAGER:UnregisterForEvent(AsylumOlorime.name, EVENT_ADD_ON_LOADED)
 	
