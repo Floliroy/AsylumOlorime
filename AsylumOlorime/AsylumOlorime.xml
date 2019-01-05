@@ -9,7 +9,7 @@
        	  </OnMoveStop>
 		 
 			<Controls>
-				<Label name="AsylumOlorimeFight" font="$(BOLD_FONT)|$(KB_40)|soft-shadow-thick" color="c8b703" wrapMode="ELLIPSIS" text="AsylumOlorimeFight">
+				<Label name="AsylumOlorimeFight" font="$(BOLD_FONT)|$(KB_40)|soft-shadow-thick" color="00FF00" wrapMode="ELLIPSIS" text="AsylumOlorimeFight">
 						<Anchor relativeTo="$(parent)"  point="CENTER"/>
 				</Label>
 			</Controls>
