@@ -1,7 +1,7 @@
 ﻿## Title: |cd7d708AsylumOlorime|r
 ## APIVersion: 100025
 ## Author: Floliroy
-## Version: 1.0
+## Version: 1.1.2
 ## OptionalDependsOn: LibAddonMenu-2.0
 ## SavedVariables: AsylumOlorimeVariables
 
@@ -29,5 +29,6 @@ Lib/LibAddonMenu-2.0/controls/texture.lua
 Lib/LibAddonMenu-2.0/controls/iconpicker.lua
 Lib/LibAddonMenu-2.0/controls/divider.lua
 
-AsylumOlorime.xml
+
 AsylumOlorime.lua
+AsylumOlorime.xml

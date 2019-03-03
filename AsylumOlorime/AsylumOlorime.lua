@@ -4,7 +4,7 @@ local LAM2 = LibStub:GetLibrary("LibAddonMenu-2.0")
 -----------------
 AsylumOlorime = {}
 AsylumOlorime.name = "AsylumOlorime"
-AsylumOlorime.version = "1.0"
+AsylumOlorime.version = "1.1.2"
 
 AsylumOlorime.groupMembers = {}
 timeLeft = {0,0,0,0,0,0,0,0}
@@ -61,151 +61,182 @@ function AsylumOlorime.CreateSettingsWindow()
 			end,
 			width = "half",
 		},
-	   [4] = {
-			type = "dropdown",
-			name = "DD Position 1",
-			tooltip = "The @name of the DD in position 1.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[1],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[1] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[1] = selected
-						AsylumOlorime.DPS[1] = selected
-						break
-					end
-				end
+		[4] = {
+			type = "button",
+			name = "Debug Positions",
+			tooltip = "If the dropdowns are empty click here to check actual position of each DDs.",
+			func = function()
+				d("|c00FF00Asylum Olorime|r\r\nPos1:" .. AsylumOlorime.DPS[1] .." |c00FF00//|r Pos2:".. AsylumOlorime.DPS[2] .." |c00FF00//|r Pos3:".. AsylumOlorime.DPS[3] .." |c00FF00//|r|r Pos4:".. AsylumOlorime.DPS[4] .." |c00FF00//|r Pos5:".. AsylumOlorime.DPS[5] .." |c00FF00//|r Pos6:".. AsylumOlorime.DPS[6] .." |c00FF00//|r Pos7:".. AsylumOlorime.DPS[7] .." |c00FF00//|r Pos8:".. AsylumOlorime.DPS[8])
 			end,
-			reference = "DD1_dropdown",
+			width = "half",
 		},
 		[5] = {
-			type = "dropdown",
-			name = "DD Position 2",
-			tooltip = "The @name of the DD in position 2.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[2],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[2] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[2] = selected
-						AsylumOlorime.DPS[2] = selected
-						break
-					end
-				end
-			end,
-			reference = "DD2_dropdown",
+			type = "submenu",
+			name = "Set DDs Positions",
+			tooltip = "Here choose the @name of each of your DDs in the correct position.",
+			controls = {
+				[1] = {
+					type = "dropdown",
+					name = "DD Position 1",
+					tooltip = "The @name of the DD in position 1.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[1],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[1] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[1] = selected
+								AsylumOlorime.DPS[1] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD1_dropdown",
+				},
+				[2] = {
+					type = "dropdown",
+					name = "DD Position 2",
+					tooltip = "The @name of the DD in position 2.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[2],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[2] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[2] = selected
+								AsylumOlorime.DPS[2] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD2_dropdown",
+				},
+				[3] = {
+					type = "dropdown",
+					name = "DD Position 3",
+					tooltip = "The @name of the DD in position 3.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[1],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[3] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[3] = selected
+								AsylumOlorime.DPS[3] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD3_dropdown",
+				},
+				[4] = {
+					type = "dropdown",
+					name = "DD Position 4",
+					tooltip = "The @name of the DD in position 4.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[4],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[4] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[4] = selected
+								AsylumOlorime.DPS[4] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD4_dropdown",
+				},
+				[5] = {
+					type = "dropdown",
+					name = "DD Position 5",
+					tooltip = "The @name of the DD in position 5.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[5],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[5] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[5] = selected
+								AsylumOlorime.DPS[5] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD5_dropdown",
+				},
+				[6] = {
+					type = "dropdown",
+					name = "DD Position 6",
+					tooltip = "The @name of the DD in position 6.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[6],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[6] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[6] = selected
+								AsylumOlorime.DPS[6] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD6_dropdown",
+				},
+				[7] = {
+					type = "dropdown",
+					name = "DD Position 7",
+					tooltip = "The @name of the DD in position 7.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[7],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[7] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[7] = selected
+								AsylumOlorime.DPS[7] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD7_dropdown",
+				},
+				[8] = {
+					type = "dropdown",
+					name = "DD Position 8",
+					tooltip = "The @name of the DD in position 8.",
+					choices = AsylumOlorime.groupMembers,
+					default = AsylumOlorime.groupMembers[1],
+					getFunc = function() return AsylumOlorime.savedVariables.DPS[8] end,
+					setFunc = function(selected)
+						for index, name in ipairs(AsylumOlorime.groupMembers) do
+							if name == selected then
+								AsylumOlorime.savedVariables.DPS[8] = selected
+								AsylumOlorime.DPS[8] = selected
+								break
+							end
+						end
+					end,
+					reference = "DD8_dropdown",
+				},
+			},
 		},
 		[6] = {
-			type = "dropdown",
-			name = "DD Position 3",
-			tooltip = "The @name of the DD in position 3.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[1],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[3] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[3] = selected
-						AsylumOlorime.DPS[3] = selected
-						break
-					end
-				end
-			end,
-			reference = "DD3_dropdown",
+			type = "header",
+			width = "full",
 		},
 		[7] = {
-			type = "dropdown",
-			name = "DD Position 4",
-			tooltip = "The @name of the DD in position 4.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[4],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[4] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[4] = selected
-						AsylumOlorime.DPS[4] = selected
-						break
-					end
-				end
+			type = "checkbox",
+			name = "Unlock",
+			tooltip = "Use it to reposition the alert.",
+			default = false,
+			getFunc = function() return AsylumOlorime.savedVariables.AlwaysShowAlert end,
+			setFunc = function(newValue) 
+				AsylumOlorime.savedVariables.AlwaysShowAlert = newValue
+				AsylumOlorimeAlert:SetHidden(not newValue)  
 			end,
-			reference = "DD4_dropdown",
-		},
+		},   
 		[8] = {
-			type = "dropdown",
-			name = "DD Position 5",
-			tooltip = "The @name of the DD in position 5.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[5],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[5] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[5] = selected
-						AsylumOlorime.DPS[5] = selected
-						break
-					end
-				end
-			end,
-			reference = "DD5_dropdown",
-		},
-		[9] = {
-			type = "dropdown",
-			name = "DD Position 6",
-			tooltip = "The @name of the DD in position 6.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[6],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[6] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[6] = selected
-						AsylumOlorime.DPS[6] = selected
-						break
-					end
-				end
-			end,
-			reference = "DD6_dropdown",
-		},
-		[10] = {
-			type = "dropdown",
-			name = "DD Position 7",
-			tooltip = "The @name of the DD in position 7.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[7],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[7] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[7] = selected
-						AsylumOlorime.DPS[7] = selected
-						break
-					end
-				end
-			end,
-			reference = "DD7_dropdown",
-		},
-		[11] = {
-			type = "dropdown",
-			name = "DD Position 8",
-			tooltip = "The @name of the DD in position 8.",
-			choices = AsylumOlorime.groupMembers,
-			default = AsylumOlorime.groupMembers[1],
-			getFunc = function() return AsylumOlorime.savedVariables.DPS[8] end,
-			setFunc = function(selected)
-				for index, name in ipairs(AsylumOlorime.groupMembers) do
-					if name == selected then
-						AsylumOlorime.savedVariables.DPS[8] = selected
-						AsylumOlorime.DPS[8] = selected
-						break
-					end
-				end
-			end,
-			reference = "DD8_dropdown",
-		},
-		[12] = {
 			type = "colorpicker",
 			name = "Alert Color",
 			getFunc = function() return unpack(AsylumOlorime.savedVariables.ColorRGB) end,
@@ -261,7 +292,8 @@ end
 ----------------
 
 function AsylumOlorime.Update()
-	if ((IsUnitInCombat("player")) and (GetZoneId(GetUnitZoneIndex("player")) == 1000)) then
+	local positionAlert = "Set Alert Position"
+	if ((IsUnitInCombat("player")) and (GetZoneId(GetUnitZoneIndex("player")) == 1000)) then -- ((IsUnitInCombat("player")) and (GetZoneId(GetUnitZoneIndex("player")) == 1000)) then
 		local currentTimeStamp = GetGameTimeMilliseconds() / 1000
 
 		local left = 0;
@@ -285,8 +317,6 @@ function AsylumOlorime.Update()
 		right 	= timeLeft[1]*1.3 + timeLeft[2]*1.2 + timeLeft[3]*1.1 + timeLeft[4]
 		left	= timeLeft[8]*1.3 + timeLeft[7]*1.2 + timeLeft[6]*1.1 + timeLeft[5]
 
-		local positionAlert = "Set Alert Position"
-
 		if right > left then
 			AsylumOlorimeAlert:SetHidden(false)
 			positionAlert = "Left"
@@ -296,12 +326,12 @@ function AsylumOlorime.Update()
 		elseif right == left then 
 			AsylumOlorimeAlert:SetHidden(false)
 			positionAlert = "Middle"
-		end
-
-		AsylumOlorimeFight:SetText(string.format("%s", positionAlert))
-	else
-		AsylumOlorimeAlert:SetHidden(true)
+		end		
+	else 		
+		AsylumOlorimeAlert:SetHidden(not AsylumOlorime.savedVariables.AlwaysShowAlert)
+		positionAlert = "Set Alert Position"
 	end
+	AsylumOlorimeFight:SetText(string.format("%s", positionAlert))
 end
 
 function AsylumOlorime.Reset(event, inCombat)
