@@ -6,7 +6,7 @@ AsylumOlorime = AsylumOlorime or { }
 local AsylumOlorime = AsylumOlorime
 
 AsylumOlorime.name = "AsylumOlorime"
-AsylumOlorime.version = "1.1.2"
+AsylumOlorime.version = "1.1.3"
 
 AsylumOlorime.groupMembers = {}
 timeLeft = {0,0,0,0,0,0,0,0}
@@ -35,7 +35,7 @@ function AsylumOlorime.CreateSettingsWindow()
 	local panelData = {
 		type = "panel",
 		name = "AsylumOlorime",
-		displayName = "Asylum Olorime",
+		displayName = "Asylum|c00ff00Olorime|r",
 		author = "Floliroy",
 		version = AsylumOlorime.version,
 		slashCommand = "/asolo",
